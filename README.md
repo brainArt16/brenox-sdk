@@ -84,9 +84,47 @@ BRENOX_WS_ORIGIN=https://app.example.com npm run test:integration   # match WS_A
 
 ## Status
 
+**v0.3.0:** Developer API (`BrenoxServer`), app management, call signaling helper.
+
 **v0.2.0:** REST + WebSocket (channel connect, `message.send` / `message.new`, typing, reconnect, gap backfill).
 
 **v0.1.0:** REST + auth (register, login, refresh, workspaces, channels, messages, profile).
+
+## BrenoxServer (API key / backend integrations)
+
+```typescript
+import { BrenoxServer } from "@brenox/sdk";
+// or: import { BrenoxServer } from "@brenox/sdk/server";
+
+const server = new BrenoxServer({
+  baseUrl: "http://localhost:8080",
+  apiKey: process.env.BRENOX_API_KEY!,
+});
+
+const user = await server.users.provision({ external_id: "user-42" });
+const channel = await server.channels.create({ name: "general" });
+await server.messages.send({
+  channel_id: channel.id,
+  external_id: "user-42",
+  content: "Hello from server",
+});
+```
+
+Create apps and keys with JWT `client.apps.create()` / `client.apps.createKey()`.
+
+## Call signaling (WebRTC)
+
+```typescript
+const signaling = client.callSignaling(workspace.id, channel.ID, {
+  origin: "http://localhost:3000",
+});
+
+signaling.on("call.offer", (event) => { /* handle SDP */ });
+
+await signaling.connect();
+const call = await signaling.initiate("video");
+signaling.sendOffer({ call_id: call.id, to_user_id: 2, sdp: "..." });
+```
 
 ## Backend docs
 

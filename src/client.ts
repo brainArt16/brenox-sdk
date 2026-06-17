@@ -1,10 +1,13 @@
 import { HttpClient } from "./http";
+import { AppsResource } from "./resources/apps";
 import { AuthResource } from "./resources/auth";
+import { CallsResource } from "./resources/calls";
 import { ChannelsResource } from "./resources/channels";
 import { MessagesResource } from "./resources/messages";
 import { UsersResource } from "./resources/users";
 import { WorkspacesResource } from "./resources/workspaces";
 import { memoryTokenStore, type TokenStore } from "./token-store";
+import { CallSignaling } from "./websocket/call-signaling";
 import {
   ChannelConnection,
   type ChannelConnectionOptions,
@@ -34,6 +37,8 @@ export class BrenoxClient {
   readonly channels: ChannelsResource;
   readonly messages: MessagesResource;
   readonly users: UsersResource;
+  readonly apps: AppsResource;
+  readonly calls: CallsResource;
 
   private readonly http: HttpClient;
 
@@ -50,6 +55,8 @@ export class BrenoxClient {
     this.channels = new ChannelsResource(this.http);
     this.messages = new MessagesResource(this.http);
     this.users = new UsersResource(this.http);
+    this.apps = new AppsResource(this.http);
+    this.calls = new CallsResource(this.http);
   }
 
   /** Open a realtime connection to a channel (WebSocket). */
@@ -67,6 +74,20 @@ export class BrenoxClient {
     });
   }
 
+  /** WebRTC signaling helper bound to a channel WebSocket + call REST APIs. */
+  callSignaling(
+    workspaceId: number,
+    channelId: number,
+    options: ChannelOptions = {},
+  ): CallSignaling {
+    return new CallSignaling(
+      this.channel(workspaceId, channelId, options),
+      this.calls,
+      workspaceId,
+      channelId,
+    );
+  }
+
   async getToken(): Promise<string | null> {
     return this.http.getToken();
   }
@@ -82,3 +103,4 @@ export type {
   SequenceStore,
 };
 export { ChannelConnection, memorySequenceStore } from "./websocket/channel";
+export { CallSignaling } from "./websocket/call-signaling";

@@ -1,6 +1,6 @@
 {
   "name": "@brenox/sdk",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "TypeScript SDK for the Brenox realtime communication platform",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -15,6 +15,16 @@
       "require": {
         "types": "./dist/index.d.cts",
         "default": "./dist/index.cjs"
+      }
+    },
+    "./server": {
+      "import": {
+        "types": "./dist/server-entry.d.ts",
+        "default": "./dist/server-entry.js"
+      },
+      "require": {
+        "types": "./dist/server-entry.d.cts",
+        "default": "./dist/server-entry.cjs"
       }
     }
   },
