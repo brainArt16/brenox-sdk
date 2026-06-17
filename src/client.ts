@@ -1,0 +1,51 @@
+import { HttpClient } from "./http";
+import { AuthResource } from "./resources/auth";
+import { ChannelsResource } from "./resources/channels";
+import { MessagesResource } from "./resources/messages";
+import { UsersResource } from "./resources/users";
+import { WorkspacesResource } from "./resources/workspaces";
+import { memoryTokenStore, type TokenStore } from "./token-store";
+
+export interface BrenoxClientOptions {
+  /** API base URL, e.g. `http://localhost:8080` */
+  baseUrl: string;
+  /** Where to persist the JWT. Defaults to in-memory. */
+  tokenStore?: TokenStore;
+  /** Custom fetch implementation (tests, Node polyfills). */
+  fetch?: typeof fetch;
+  /** Called after a successful token refresh. */
+  onTokenRefreshed?: (token: string) => void;
+}
+
+export class BrenoxClient {
+  readonly auth: AuthResource;
+  readonly workspaces: WorkspacesResource;
+  readonly channels: ChannelsResource;
+  readonly messages: MessagesResource;
+  readonly users: UsersResource;
+
+  private readonly http: HttpClient;
+
+  constructor(options: BrenoxClientOptions) {
+    this.http = new HttpClient({
+      baseUrl: options.baseUrl,
+      tokenStore: options.tokenStore ?? memoryTokenStore(),
+      fetch: options.fetch,
+      onTokenRefreshed: options.onTokenRefreshed,
+    });
+
+    this.auth = new AuthResource(this.http);
+    this.workspaces = new WorkspacesResource(this.http);
+    this.channels = new ChannelsResource(this.http);
+    this.messages = new MessagesResource(this.http);
+    this.users = new UsersResource(this.http);
+  }
+
+  async getToken(): Promise<string | null> {
+    return this.http.getToken();
+  }
+
+  async setToken(token: string | null): Promise<void> {
+    return this.http.setToken(token);
+  }
+}
