@@ -1,6 +1,6 @@
 {
   "name": "@brenox/sdk",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "TypeScript SDK for the Brenox realtime communication platform",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -40,8 +40,10 @@
   },
   "devDependencies": {
     "@types/node": "^25.9.3",
+    "@types/ws": "^8.18.1",
     "tsup": "^8.5.1",
     "typescript": "^6.0.3",
-    "vitest": "^3.2.4"
+    "vitest": "^3.2.4",
+    "ws": "^8.21.0"
   }
 }

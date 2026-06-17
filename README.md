@@ -53,6 +53,25 @@ const client = new BrenoxClient({
 });
 ```
 
+**v0.2.0 — Milestone 2:** WebSocket channel client with reconnect, sequence tracking, and REST backfill.
+
+```typescript
+const conn = client.channel(workspace.id, channel.ID);
+conn.on("message.new", (event) => {
+  console.log(event.payload.content);
+});
+await conn.connect();
+conn.sendMessage("Hello realtime!");
+```
+
+**Node.js:** pass an `origin` matching the server's `WS_ALLOWED_ORIGINS` (dev default `http://localhost:3000`):
+
+```typescript
+const conn = client.channel(workspace.id, channel.ID, {
+  origin: "http://localhost:3000",
+});
+```
+
 ## Scripts
 
 ```bash
@@ -60,13 +79,14 @@ npm run build              # compile to dist/
 npm test                   # unit tests
 npm run test:integration   # smoke test against localhost:8080
 BRENOX_URL=https://staging.example.com npm run test:integration
+BRENOX_WS_ORIGIN=https://app.example.com npm run test:integration   # match WS_ALLOWED_ORIGINS
 ```
 
 ## Status
 
-**v0.1.0 — Milestone 1:** REST + auth (register, login, refresh, workspaces, channels, messages, profile).
+**v0.2.0:** REST + WebSocket (channel connect, `message.send` / `message.new`, typing, reconnect, gap backfill).
 
-Coming next: WebSocket channel client, reconnect, and gap fill (see Brenox `docs/SDK_INTEGRATION.md`).
+**v0.1.0:** REST + auth (register, login, refresh, workspaces, channels, messages, profile).
 
 ## Backend docs
 

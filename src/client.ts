@@ -5,6 +5,12 @@ import { MessagesResource } from "./resources/messages";
 import { UsersResource } from "./resources/users";
 import { WorkspacesResource } from "./resources/workspaces";
 import { memoryTokenStore, type TokenStore } from "./token-store";
+import {
+  ChannelConnection,
+  type ChannelConnectionOptions,
+  type ReconnectOptions,
+  type SequenceStore,
+} from "./websocket/channel";
 
 export interface BrenoxClientOptions {
   /** API base URL, e.g. `http://localhost:8080` */
@@ -16,6 +22,11 @@ export interface BrenoxClientOptions {
   /** Called after a successful token refresh. */
   onTokenRefreshed?: (token: string) => void;
 }
+
+export type ChannelOptions = Omit<
+  ChannelConnectionOptions,
+  "workspaceId" | "channelId" | "http" | "messages"
+>;
 
 export class BrenoxClient {
   readonly auth: AuthResource;
@@ -41,6 +52,21 @@ export class BrenoxClient {
     this.users = new UsersResource(this.http);
   }
 
+  /** Open a realtime connection to a channel (WebSocket). */
+  channel(
+    workspaceId: number,
+    channelId: number,
+    options: ChannelOptions = {},
+  ): ChannelConnection {
+    return new ChannelConnection({
+      workspaceId,
+      channelId,
+      http: this.http,
+      messages: this.messages,
+      ...options,
+    });
+  }
+
   async getToken(): Promise<string | null> {
     return this.http.getToken();
   }
@@ -49,3 +75,10 @@ export class BrenoxClient {
     return this.http.setToken(token);
   }
 }
+
+export type {
+  ChannelConnectionOptions,
+  ReconnectOptions,
+  SequenceStore,
+};
+export { ChannelConnection, memorySequenceStore } from "./websocket/channel";

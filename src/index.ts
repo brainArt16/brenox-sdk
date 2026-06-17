@@ -1,5 +1,15 @@
-export { BrenoxClient } from "./client";
-export type { BrenoxClientOptions } from "./client";
+export {
+  BrenoxClient,
+  ChannelConnection,
+  memorySequenceStore,
+} from "./client";
+export type {
+  BrenoxClientOptions,
+  ChannelConnectionOptions,
+  ChannelOptions,
+  ReconnectOptions,
+  SequenceStore,
+} from "./client";
 
 export { BrenoxError } from "./errors";
 
@@ -27,3 +37,12 @@ export type {
   Workspace,
   WorkspaceListItem,
 } from "./types/api";
+
+export type {
+  ChannelServerEventMap,
+  ChannelServerEventType,
+  ClientOutboundEvent,
+  ClientOutboundEventType,
+  ConnectionState,
+  ServerEvent,
+} from "./types/events";
