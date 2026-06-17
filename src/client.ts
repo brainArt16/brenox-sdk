@@ -1,9 +1,11 @@
 import { HttpClient } from "./http";
 import { AppsResource } from "./resources/apps";
+import { AttachmentsResource } from "./resources/attachments";
 import { AuthResource } from "./resources/auth";
 import { CallsResource } from "./resources/calls";
 import { ChannelsResource } from "./resources/channels";
 import { MessagesResource } from "./resources/messages";
+import { NotificationsResource } from "./resources/notifications";
 import { UsersResource } from "./resources/users";
 import { WorkspacesResource } from "./resources/workspaces";
 import { memoryTokenStore, type TokenStore } from "./token-store";
@@ -39,6 +41,8 @@ export class BrenoxClient {
   readonly users: UsersResource;
   readonly apps: AppsResource;
   readonly calls: CallsResource;
+  readonly notifications: NotificationsResource;
+  readonly attachments: AttachmentsResource;
 
   private readonly http: HttpClient;
 
@@ -57,6 +61,8 @@ export class BrenoxClient {
     this.users = new UsersResource(this.http);
     this.apps = new AppsResource(this.http);
     this.calls = new CallsResource(this.http);
+    this.notifications = new NotificationsResource(this.http);
+    this.attachments = new AttachmentsResource(this.http);
   }
 
   /** Open a realtime connection to a channel (WebSocket). */

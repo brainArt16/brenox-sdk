@@ -84,6 +84,8 @@ BRENOX_WS_ORIGIN=https://app.example.com npm run test:integration   # match WS_A
 
 ## Status
 
+**v0.4.0:** Notifications API, attachments/uploads (presigned URL flow), `@brenox/react` hooks package.
+
 **v0.3.0:** Developer API (`BrenoxServer`), app management, call signaling helper.
 
 **v0.2.0:** REST + WebSocket (channel connect, `message.send` / `message.new`, typing, reconnect, gap backfill).
@@ -125,6 +127,41 @@ await signaling.connect();
 const call = await signaling.initiate("video");
 signaling.sendOffer({ call_id: call.id, to_user_id: 2, sdp: "..." });
 ```
+
+## Notifications
+
+```typescript
+const items = await client.notifications.list({ limit: 50 });
+await client.notifications.markRead(items[0].id);
+await client.notifications.markAllRead();
+```
+
+## Attachments / uploads
+
+```typescript
+const file = new File(["content"], "doc.pdf", { type: "application/pdf" });
+const uploaded = await client.attachments.uploadFile(file, {
+  fileName: file.name,
+  mimeType: file.type,
+});
+
+await client.messages.send(workspace.id, channel.ID, {
+  content: "See attached",
+  attachments: [uploaded],
+});
+
+// Or attach after send:
+const message = await client.messages.send(workspace.id, channel.ID, { content: "hi" });
+await client.attachments.attachToMessage(workspace.id, channel.ID, message.id, [uploaded]);
+```
+
+## React hooks (`@brenox/react`)
+
+```bash
+npm install @brenox/react
+```
+
+See [react/README.md](react/README.md) for `BrenoxProvider`, `useMessages`, `useNotifications`, `useCallSignaling`.
 
 ## Backend docs
 

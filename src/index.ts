@@ -79,3 +79,18 @@ export type {
   ProvisionUserInput,
   SendDeveloperMessageInput,
 } from "./types/developer";
+
+export type {
+  Attachment,
+  AttachmentInput,
+  CreateUploadInput,
+  UploadedFileMeta,
+  UploadUrl,
+} from "./types/attachments";
+
+export type {
+  ListNotificationsParams,
+  MarkAllReadResult,
+  Notification,
+  NotificationType,
+} from "./types/notifications";

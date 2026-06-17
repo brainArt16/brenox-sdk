@@ -78,6 +78,12 @@ export interface MessageListItem extends Message {
 export interface CreateMessageInput {
   content: string;
   reply_to_message_id?: number;
+  attachments?: Array<{
+    object_key: string;
+    file_name: string;
+    mime_type: string;
+    size_bytes: number;
+  }>;
 }
 
 export interface UserProfile {
