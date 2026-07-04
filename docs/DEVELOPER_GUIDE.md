@@ -22,7 +22,18 @@ Build realtime chat, voice, and video into your product with **@brenox/sdk** and
 
 ---
 
-## Choose your SDK
+## Versioned documentation
+
+Developers can open docs for a **specific SDK version**:
+
+```
+/docs?sdk=typescript&v=0.4.0
+/docs?sdk=react&v=0.1.0
+```
+
+Version catalog is maintained in the developer console (`brenox-web/lib/docs/sdk-versions.ts`). See [VERSIONING.md](VERSIONING.md) for the release checklist.
+
+---
 
 Brenox ships official SDKs per language and framework. Pick the one that matches your stack:
 
