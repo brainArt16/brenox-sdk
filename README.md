@@ -4,6 +4,8 @@ TypeScript client for the [Brenox](https://github.com/brainArt16/brenox) realtim
 
 This is a **library**, not a React/Next app. Use it from Node 18+, browsers, or bundlers.
 
+**Full developer guide:** [docs/DEVELOPER_GUIDE.md](docs/DEVELOPER_GUIDE.md) — SDK-only integration guide for building on Brenox.
+
 ## Install
 
 ```bash
@@ -163,7 +165,7 @@ npm install @brenox/react
 
 See [react/README.md](react/README.md) for `BrenoxProvider`, `useMessages`, `useNotifications`, `useCallSignaling`.
 
-## Backend docs
+## Documentation
 
-- [SDK Integration Guide](https://github.com/brainArt16/brenox/blob/main/docs/SDK_INTEGRATION.md)
-- [WebSocket Events](https://github.com/brainArt16/brenox/blob/main/docs/WEBSOCKET_EVENTS.md)
+- [Developer Guide](docs/DEVELOPER_GUIDE.md) — start here (SDK integration)
+- [React hooks](react/README.md)
