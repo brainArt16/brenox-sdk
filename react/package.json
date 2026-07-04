@@ -1,6 +1,6 @@
 {
   "name": "@brenox/react",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "React hooks for the Brenox TypeScript SDK",
   "homepage": "https://www.breno-x.com/docs?sdk=react&v=0.1.1",
   "repository": {
