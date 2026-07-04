@@ -8,8 +8,13 @@ This is a **library**, not a React/Next app. Use it from Node 18+, browsers, or 
 
 ## Install
 
+`@brenox/sdk` is a standard npm package — use **npm**, **pnpm**, or **yarn**:
+
 ```bash
 npm install @brenox/sdk
+# or: pnpm add @brenox/sdk
+# or: yarn add @brenox/sdk
+
 # local dev while unpublished:
 npm link /path/to/brenox-sdk
 ```
