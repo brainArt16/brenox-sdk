@@ -18,7 +18,7 @@ import { BrenoxClient, localStorageTokenStore } from "@brenox/sdk";
 import { BrenoxProvider, useMessages } from "@brenox/react";
 
 const client = new BrenoxClient({
-  baseUrl: process.env.NEXT_PUBLIC_BRENOX_API_URL ?? "https://api.brenox.io",
+  baseUrl: process.env.NEXT_PUBLIC_BRENOX_API_URL ?? "https://api.breno-x.com",
   tokenStore: localStorageTokenStore(),
 });
 

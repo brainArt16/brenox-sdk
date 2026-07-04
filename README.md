@@ -19,7 +19,7 @@ Create an app and API key in the [developer console](https://brenox-web.vercel.a
 import { BrenoxClient, localStorageTokenStore } from "@brenox/sdk";
 
 const client = new BrenoxClient({
-  baseUrl: process.env.BRENOX_API_URL ?? "https://api.brenox.io",
+  baseUrl: process.env.BRENOX_API_URL ?? "https://api.breno-x.com",
   tokenStore: localStorageTokenStore(),
 });
 

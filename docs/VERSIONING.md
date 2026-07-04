@@ -9,7 +9,7 @@ How Brenox SDK versions are published, tracked, and shown in the developer conso
 | **package.json is source of truth** | npm/pnpm/yarn version comes from the SDK repo at publish time |
 | **Docs catalog mirrors releases** | Console docs use a static catalog developers can browse by version |
 | **Semver** | `MAJOR.MINOR.PATCH` — breaking changes bump major |
-| **Pin in production** | Recommend `@brenox/sdk@0.1.0` not `@latest` in production apps |
+| **Pin in production** | Recommend `@brenox/sdk@0.1.1` not `@latest` in production apps |
 
 ## Where things live
 
@@ -17,8 +17,11 @@ How Brenox SDK versions are published, tracked, and shown in the developer conso
 |------|------|
 | Published version | `brenox-sdk/package.json`, `brenox-sdk/react/package.json` |
 | Docs version catalog | `brenox-web/lib/docs/sdk-versions.ts` |
+| Engine version catalog | `brenox-web/lib/docs/engine-versions.ts` |
+| Production API URL | `brenox-web/lib/docs/api-config.ts` (`https://api.breno-x.com`) |
 | Per-SDK snippets | `brenox-web/lib/docs/sdk-snippets.ts` |
 | SDK registry (languages) | `brenox-web/lib/docs/sdk-registry.ts` |
+| Engine release semver | `brenox-engine/VERSION`, `GET /version` |
 
 ## Developer-facing URLs
 

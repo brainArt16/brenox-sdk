@@ -73,8 +73,8 @@ npm install @brenox/react   # optional, same with pnpm/yarn
 
 ```env
 BRENOX_API_KEY=bx_test_your_sandbox_key
-BRENOX_API_URL=https://api.brenox.io
-NEXT_PUBLIC_BRENOX_API_URL=https://api.brenox.io
+BRENOX_API_URL=https://api.breno-x.com
+NEXT_PUBLIC_BRENOX_API_URL=https://api.breno-x.com
 ```
 
 ### 4. Send your first message
@@ -83,7 +83,7 @@ NEXT_PUBLIC_BRENOX_API_URL=https://api.brenox.io
 import { BrenoxClient, localStorageTokenStore } from "@brenox/sdk";
 
 const client = new BrenoxClient({
-  baseUrl: process.env.NEXT_PUBLIC_BRENOX_API_URL ?? "https://api.brenox.io",
+  baseUrl: process.env.NEXT_PUBLIC_BRENOX_API_URL ?? "https://api.breno-x.com",
   tokenStore: localStorageTokenStore(),
 });
 
