@@ -1,6 +1,9 @@
 # @brenox/react
 
-React hooks for [@brenox/sdk](../README.md).
+React hooks for [@brenox/sdk](https://www.npmjs.com/package/@brenox/sdk).
+
+- **Documentation:** [brenox-web.vercel.app/docs](https://brenox-web.vercel.app/docs?sdk=react&v=0.1.0)
+- **Requires:** React 18+ · `@brenox/sdk` >= 0.1.0
 
 ## Install
 
@@ -8,83 +11,54 @@ React hooks for [@brenox/sdk](../README.md).
 npm install @brenox/react @brenox/sdk react
 ```
 
-## Setup
+## Quick start
 
 ```tsx
-import { BrenoxClient } from "@brenox/sdk";
-import { BrenoxProvider } from "@brenox/react";
+import { BrenoxClient, localStorageTokenStore } from "@brenox/sdk";
+import { BrenoxProvider, useMessages } from "@brenox/react";
 
 const client = new BrenoxClient({
-  baseUrl: "http://localhost:8080",
+  baseUrl: process.env.NEXT_PUBLIC_BRENOX_API_URL ?? "https://api.brenox.io",
+  tokenStore: localStorageTokenStore(),
 });
 
-export function App() {
+function App() {
   return (
     <BrenoxProvider client={client}>
-      <Chat />
+      <Chat workspaceId={1} channelId={1} />
     </BrenoxProvider>
   );
 }
-```
-
-## Hooks
-
-### `useMessages(workspaceId, channelId)`
-
-Loads history via REST and merges live `message.new` / `message.updated` from the channel WebSocket.
-
-```tsx
-import { useMessages } from "@brenox/react";
 
 function Chat({ workspaceId, channelId }: { workspaceId: number; channelId: number }) {
-  const { messages, loading, sendMessage, connectionState } = useMessages(
-    workspaceId,
-    channelId,
-    { channel: { origin: "http://localhost:3000" } },
-  );
-
-  if (loading) return <p>Loading…</p>;
+  const { messages, sendMessage, connectionState } = useMessages(workspaceId, channelId, {
+    channel: { origin: window.location.origin },
+  });
 
   return (
     <div>
-      <p>Status: {connectionState}</p>
-      <ul>
-        {messages.map((message) => (
-          <li key={message.id}>{message.content}</li>
-        ))}
-      </ul>
+      <p>{connectionState}</p>
+      <ul>{messages.map((m) => <li key={m.id}>{m.content}</li>)}</ul>
       <button onClick={() => void sendMessage("Hello!")}>Send</button>
     </div>
   );
 }
 ```
 
-### `useChannel(workspaceId, channelId)`
+## Hooks
 
-Lower-level WebSocket access when you manage events yourself.
+| Hook | Purpose |
+|------|---------|
+| `useMessages` | Message history, live updates, send |
+| `useChannel` | Low-level WebSocket events |
+| `useNotifications` | Poll and mark notifications read |
+| `useCallSignaling` | Voice/video call signaling |
 
-### `useNotifications()`
+Full API reference: [React SDK docs](https://brenox-web.vercel.app/docs?sdk=react&v=0.1.0)
 
-```tsx
-const { notifications, markRead, markAllRead, refresh } = useNotifications({
-  pollIntervalMs: 30_000,
-});
-```
+## Links
 
-### `useCallSignaling(workspaceId, channelId)`
-
-Wraps `CallSignaling` with auto-connect and cleanup.
-
-```tsx
-const { signaling, initiate, connectionState } = useCallSignaling(workspaceId, channelId);
-
-await initiate("video");
-signaling?.on("call.offer", (event) => { /* SDP */ });
-```
-
-## Build
-
-```bash
-npm run build
-npm test
-```
+- [Documentation](https://brenox-web.vercel.app/docs?sdk=react&v=0.1.0)
+- [@brenox/sdk](https://www.npmjs.com/package/@brenox/sdk)
+- [GitHub](https://github.com/brainArt16/brenox-sdk)
+- [Issues](https://github.com/brainArt16/brenox-sdk/issues)

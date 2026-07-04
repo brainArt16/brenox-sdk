@@ -1,170 +1,81 @@
 # @brenox/sdk
 
-TypeScript client for the [Brenox](https://github.com/brainArt16/brenox) realtime communication platform.
+Official TypeScript SDK for [Brenox](https://brenox-web.vercel.app) — realtime messaging, presence, notifications, attachments, and WebRTC signaling.
 
-This is a **library**, not a React/Next app. Use it from Node 18+, browsers, or bundlers.
-
-**Full developer guide:** [docs/DEVELOPER_GUIDE.md](docs/DEVELOPER_GUIDE.md) — SDK-only integration guide for building on Brenox.
+- **Documentation:** [brenox-web.vercel.app/docs](https://brenox-web.vercel.app/docs?sdk=typescript&v=0.1.0)
+- **Requires:** Node 18+ · browsers · bundlers
 
 ## Install
 
-`@brenox/sdk` is a standard npm package — use **npm**, **pnpm**, or **yarn**:
-
 ```bash
 npm install @brenox/sdk
-# or: pnpm add @brenox/sdk
-# or: yarn add @brenox/sdk
-
-# local dev while unpublished:
-npm link /path/to/brenox-sdk
 ```
 
 ## Quick start
 
-Start the Brenox API (`make dev-up` in the backend repo), then:
-
-```typescript
-import { BrenoxClient } from "@brenox/sdk";
-
-const client = new BrenoxClient({
-  baseUrl: "http://localhost:8080",
-});
-
-await client.auth.register({
-  email: "you@example.com",
-  username: "you",
-  password: "secret123",
-});
-
-await client.auth.login({
-  email: "you@example.com",
-  password: "secret123",
-});
-
-const workspaces = await client.workspaces.list();
-const workspace = await client.workspaces.create({ name: "My Team", slug: "my-team" });
-const channel = await client.channels.create(workspace.id, { name: "general" });
-
-await client.messages.send(workspace.id, channel.ID, { content: "Hello!" });
-const messages = await client.messages.list(workspace.id, channel.ID);
-```
-
-## Browser token storage
+Create an app and API key in the [developer console](https://brenox-web.vercel.app), then:
 
 ```typescript
 import { BrenoxClient, localStorageTokenStore } from "@brenox/sdk";
 
 const client = new BrenoxClient({
-  baseUrl: "http://localhost:8080",
+  baseUrl: process.env.BRENOX_API_URL ?? "https://api.brenox.io",
   tokenStore: localStorageTokenStore(),
 });
+
+await client.auth.login({ email: "user@example.com", password: "secret" });
+
+const [workspace] = await client.workspaces.list();
+const channel = await client.channels.create(workspace.id, { name: "general" });
+
+await client.messages.send(workspace.id, channel.ID, { content: "Hello!" });
 ```
 
-**WebSocket (included in v0.1.0):** Channel client with reconnect, sequence tracking, and REST backfill.
+### Realtime channel
 
 ```typescript
-const conn = client.channel(workspace.id, channel.ID);
-conn.on("message.new", (event) => {
-  console.log(event.payload.content);
+const conn = client.channel(workspace.id, channel.ID, {
+  origin: typeof window !== "undefined" ? window.location.origin : "http://localhost:3000",
 });
+
+conn.on("message.new", (event) => console.log(event.payload.content));
 await conn.connect();
 conn.sendMessage("Hello realtime!");
 ```
 
-**Node.js:** pass an `origin` matching the server's `WS_ALLOWED_ORIGINS` (dev default `http://localhost:3000`):
+## Exports
 
-```typescript
-const conn = client.channel(workspace.id, channel.ID, {
-  origin: "http://localhost:3000",
-});
-```
+| Import | Client | Use case |
+|--------|--------|----------|
+| `@brenox/sdk` | `BrenoxClient` | User-facing apps (browser, mobile, Node) |
+| `@brenox/sdk/server` | `BrenoxServer` | Trusted backends with API keys (`bx_test_*` / `bx_live_*`) |
 
-## Scripts
+`BrenoxClient` covers auth, workspaces, channels, messages (REST + WebSocket), typing, presence, notifications, attachments, and call signaling.
 
-```bash
-npm run build              # compile to dist/
-npm test                   # unit tests
-npm run test:integration   # smoke test against localhost:8080
-BRENOX_URL=https://staging.example.com npm run test:integration
-BRENOX_WS_ORIGIN=https://app.example.com npm run test:integration   # match WS_ALLOWED_ORIGINS
-```
+`BrenoxServer` covers user provisioning, channels, and server-sent messages. See the [server integration guide](https://brenox-web.vercel.app/docs?sdk=typescript&v=0.1.0).
 
-## Status
+## React
 
-**v0.1.0** — Initial public release: `BrenoxClient` (auth, messaging, WebSocket, presence, notifications, attachments), `BrenoxServer` (backend integrations), call signaling, and `@brenox/react` hooks.
-
-## BrenoxServer (API key / backend integrations)
-
-```typescript
-import { BrenoxServer } from "@brenox/sdk";
-// or: import { BrenoxServer } from "@brenox/sdk/server";
-
-const server = new BrenoxServer({
-  baseUrl: "http://localhost:8080",
-  apiKey: process.env.BRENOX_API_KEY!,
-});
-
-const user = await server.users.provision({ external_id: "user-42" });
-const channel = await server.channels.create({ name: "general" });
-await server.messages.send({
-  channel_id: channel.id,
-  external_id: "user-42",
-  content: "Hello from server",
-});
-```
-
-Create apps and keys with JWT `client.apps.create()` / `client.apps.createKey()`.
-
-## Call signaling (WebRTC)
-
-```typescript
-const signaling = client.callSignaling(workspace.id, channel.ID, {
-  origin: "http://localhost:3000",
-});
-
-signaling.on("call.offer", (event) => { /* handle SDP */ });
-
-await signaling.connect();
-const call = await signaling.initiate("video");
-signaling.sendOffer({ call_id: call.id, to_user_id: 2, sdp: "..." });
-```
-
-## Notifications
-
-```typescript
-const items = await client.notifications.list({ limit: 50 });
-await client.notifications.markRead(items[0].id);
-await client.notifications.markAllRead();
-```
-
-## Attachments / uploads
-
-```typescript
-const file = new File(["content"], "doc.pdf", { type: "application/pdf" });
-const uploaded = await client.attachments.uploadFile(file, {
-  fileName: file.name,
-  mimeType: file.type,
-});
-
-await client.messages.send(workspace.id, channel.ID, {
-  content: "See attached",
-  attachments: [uploaded],
-});
-
-// Or attach after send:
-const message = await client.messages.send(workspace.id, channel.ID, { content: "hi" });
-await client.attachments.attachToMessage(workspace.id, channel.ID, message.id, [uploaded]);
-```
-
-## React hooks (`@brenox/react`)
+For hooks (`BrenoxProvider`, `useMessages`, `useNotifications`, `useCallSignaling`):
 
 ```bash
-npm install @brenox/react
+npm install @brenox/react @brenox/sdk react
 ```
 
-See [react/README.md](react/README.md) for `BrenoxProvider`, `useMessages`, `useNotifications`, `useCallSignaling`.
+Docs: [@brenox/react on npm](https://www.npmjs.com/package/@brenox/react) · [React SDK guide](https://brenox-web.vercel.app/docs?sdk=react&v=0.1.0)
 
-## Documentation
+## Links
 
-- [Developer Guide](docs/DEVELOPER_GUIDE.md) — start here (SDK integration)
-- [React hooks](react/README.md)
+- [Documentation](https://brenox-web.vercel.app/docs?sdk=typescript&v=0.1.0)
+- [Developer console](https://brenox-web.vercel.app)
+- [GitHub](https://github.com/brainArt16/brenox-sdk)
+- [Issues](https://github.com/brainArt16/brenox-sdk/issues)
+
+## Development
+
+```bash
+npm ci
+npm run build:all
+npm test
+npm run test:integration   # requires Brenox API on localhost:8080
+```
