@@ -8,7 +8,14 @@ Official TypeScript SDK for [Brenox](https://www.breno-x.com) — realtime messa
 ## Install
 
 ```bash
+# npm
 npm install @brenox/sdk
+
+# pnpm
+pnpm add @brenox/sdk
+
+# yarn
+yarn add @brenox/sdk
 ```
 
 ## Quick start
@@ -59,7 +66,14 @@ conn.sendMessage("Hello realtime!");
 For hooks (`BrenoxProvider`, `useMessages`, `useNotifications`, `useCallSignaling`):
 
 ```bash
+# npm
 npm install @brenox/react @brenox/sdk react
+
+# pnpm
+pnpm add @brenox/react @brenox/sdk react
+
+# yarn
+yarn add @brenox/react @brenox/sdk react
 ```
 
 Docs: [@brenox/react on npm](https://www.npmjs.com/package/@brenox/react) · [React SDK guide](https://www.breno-x.com/docs?sdk=react&v=0.1.1)

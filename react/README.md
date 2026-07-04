@@ -8,7 +8,14 @@ React hooks for [@brenox/sdk](https://www.npmjs.com/package/@brenox/sdk).
 ## Install
 
 ```bash
+# npm
 npm install @brenox/react @brenox/sdk react
+
+# pnpm
+pnpm add @brenox/react @brenox/sdk react
+
+# yarn
+yarn add @brenox/react @brenox/sdk react
 ```
 
 ## Quick start
