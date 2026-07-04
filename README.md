@@ -60,7 +60,7 @@ const client = new BrenoxClient({
 });
 ```
 
-**v0.2.0 — Milestone 2:** WebSocket channel client with reconnect, sequence tracking, and REST backfill.
+**WebSocket (included in v0.1.0):** Channel client with reconnect, sequence tracking, and REST backfill.
 
 ```typescript
 const conn = client.channel(workspace.id, channel.ID);
@@ -91,13 +91,7 @@ BRENOX_WS_ORIGIN=https://app.example.com npm run test:integration   # match WS_A
 
 ## Status
 
-**v0.4.0:** Notifications API, attachments/uploads (presigned URL flow), `@brenox/react` hooks package.
-
-**v0.3.0:** Developer API (`BrenoxServer`), app management, call signaling helper.
-
-**v0.2.0:** REST + WebSocket (channel connect, `message.send` / `message.new`, typing, reconnect, gap backfill).
-
-**v0.1.0:** REST + auth (register, login, refresh, workspaces, channels, messages, profile).
+**v0.1.0** — Initial public release: `BrenoxClient` (auth, messaging, WebSocket, presence, notifications, attachments), `BrenoxServer` (backend integrations), call signaling, and `@brenox/react` hooks.
 
 ## BrenoxServer (API key / backend integrations)
 

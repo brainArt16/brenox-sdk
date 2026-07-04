@@ -27,7 +27,7 @@ Build realtime chat, voice, and video into your product with **@brenox/sdk** and
 Developers can open docs for a **specific SDK version**:
 
 ```
-/docs?sdk=typescript&v=0.4.0
+/docs?sdk=typescript&v=0.1.0
 /docs?sdk=react&v=0.1.0
 ```
 
