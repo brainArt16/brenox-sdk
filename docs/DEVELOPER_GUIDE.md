@@ -24,14 +24,14 @@ Build realtime chat, voice, and video into your product with **@brenox/sdk** and
 
 ## Versioned documentation
 
-Developers can open docs for a **specific SDK version**:
+Developers can open docs for a **specific SDK version** at [www.breno-x.com/docs](https://www.breno-x.com/docs):
 
 ```
-/docs?sdk=typescript&v=0.1.0
-/docs?sdk=react&v=0.1.0
+https://www.breno-x.com/docs?sdk=typescript&v=0.1.1
+https://www.breno-x.com/docs?sdk=react&v=0.1.1
 ```
 
-Version catalog is maintained in the developer console (`brenox-web/lib/docs/sdk-versions.ts`). See [VERSIONING.md](VERSIONING.md) for the release checklist.
+Version catalog is maintained in the developer console ([www.breno-x.com](https://www.breno-x.com), `brenox-web/lib/docs/sdk-versions.ts`). See [VERSIONING.md](VERSIONING.md) for the release checklist.
 
 ---
 
@@ -47,7 +47,7 @@ Brenox ships official SDKs per language and framework. Pick the one that matches
 | **Vue** | `@brenox/vue` | Coming soon | Vue 3, Nuxt |
 | **React Native** | `@brenox/react-native` | Coming soon | Expo, native mobile |
 
-Use the developer console **Documentation** page to switch SDKs — examples and sections update automatically (`/docs?sdk=react`).
+Use the [developer console](https://www.breno-x.com) **Documentation** page to switch SDKs — examples and sections update automatically (`https://www.breno-x.com/docs?sdk=react`).
 
 When adding a new SDK, register it in `lib/docs/sdk-registry.ts` (console) and add snippet files alongside.
 
@@ -57,7 +57,7 @@ When adding a new SDK, register it in `lib/docs/sdk-registry.ts` (console) and a
 
 ### 1. Create an app
 
-Use the **developer console** → Apps → New app → API Keys. Copy your sandbox key (`bx_test_*`).
+Use the **developer console** at [www.breno-x.com](https://www.breno-x.com) → Apps → New app → API Keys. Copy your sandbox key (`bx_test_*`).
 
 ### 2. Install
 

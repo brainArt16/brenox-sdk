@@ -2,7 +2,7 @@
   "name": "@brenox/sdk",
   "version": "0.1.1",
   "description": "TypeScript SDK for the Brenox realtime communication platform",
-  "homepage": "https://brenox-web.vercel.app/docs?sdk=typescript&v=0.1.0",
+  "homepage": "https://www.breno-x.com/docs?sdk=typescript&v=0.1.1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/brainArt16/brenox-sdk.git"

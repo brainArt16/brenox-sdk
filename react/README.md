@@ -2,7 +2,7 @@
 
 React hooks for [@brenox/sdk](https://www.npmjs.com/package/@brenox/sdk).
 
-- **Documentation:** [brenox-web.vercel.app/docs](https://brenox-web.vercel.app/docs?sdk=react&v=0.1.0)
+- **Documentation:** [www.breno-x.com/docs](https://www.breno-x.com/docs?sdk=react&v=0.1.1)
 - **Requires:** React 18+ · `@brenox/sdk` >= 0.1.0
 
 ## Install
@@ -54,11 +54,11 @@ function Chat({ workspaceId, channelId }: { workspaceId: number; channelId: numb
 | `useNotifications` | Poll and mark notifications read |
 | `useCallSignaling` | Voice/video call signaling |
 
-Full API reference: [React SDK docs](https://brenox-web.vercel.app/docs?sdk=react&v=0.1.0)
+Full API reference: [React SDK docs](https://www.breno-x.com/docs?sdk=react&v=0.1.1)
 
 ## Links
 
-- [Documentation](https://brenox-web.vercel.app/docs?sdk=react&v=0.1.0)
+- [Documentation](https://www.breno-x.com/docs?sdk=react&v=0.1.1)
 - [@brenox/sdk](https://www.npmjs.com/package/@brenox/sdk)
 - [GitHub](https://github.com/brainArt16/brenox-sdk)
 - [Issues](https://github.com/brainArt16/brenox-sdk/issues)

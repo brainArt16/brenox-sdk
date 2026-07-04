@@ -2,7 +2,7 @@
   "name": "@brenox/react",
   "version": "0.1.1",
   "description": "React hooks for the Brenox TypeScript SDK",
-  "homepage": "https://brenox-web.vercel.app/docs?sdk=react&v=0.1.0",
+  "homepage": "https://www.breno-x.com/docs?sdk=react&v=0.1.1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/brainArt16/brenox-sdk.git",

@@ -19,6 +19,7 @@ How Brenox SDK versions are published, tracked, and shown in the developer conso
 | Docs version catalog | `brenox-web/lib/docs/sdk-versions.ts` |
 | Engine version catalog | `brenox-web/lib/docs/engine-versions.ts` |
 | Production API URL | `brenox-web/lib/docs/api-config.ts` (`https://api.breno-x.com`) |
+| Production web / docs | `https://www.breno-x.com` |
 | Per-SDK snippets | `brenox-web/lib/docs/sdk-snippets.ts` |
 | SDK registry (languages) | `brenox-web/lib/docs/sdk-registry.ts` |
 | Engine release semver | `brenox-engine/VERSION`, `GET /version` |

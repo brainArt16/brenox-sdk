@@ -1,8 +1,8 @@
 # @brenox/sdk
 
-Official TypeScript SDK for [Brenox](https://brenox-web.vercel.app) — realtime messaging, presence, notifications, attachments, and WebRTC signaling.
+Official TypeScript SDK for [Brenox](https://www.breno-x.com) — realtime messaging, presence, notifications, attachments, and WebRTC signaling.
 
-- **Documentation:** [brenox-web.vercel.app/docs](https://brenox-web.vercel.app/docs?sdk=typescript&v=0.1.0)
+- **Documentation:** [www.breno-x.com/docs](https://www.breno-x.com/docs?sdk=typescript&v=0.1.1)
 - **Requires:** Node 18+ · browsers · bundlers
 
 ## Install
@@ -13,7 +13,7 @@ npm install @brenox/sdk
 
 ## Quick start
 
-Create an app and API key in the [developer console](https://brenox-web.vercel.app), then:
+Create an app and API key in the [developer console](https://www.breno-x.com), then:
 
 ```typescript
 import { BrenoxClient, localStorageTokenStore } from "@brenox/sdk";
@@ -52,7 +52,7 @@ conn.sendMessage("Hello realtime!");
 
 `BrenoxClient` covers auth, workspaces, channels, messages (REST + WebSocket), typing, presence, notifications, attachments, and call signaling.
 
-`BrenoxServer` covers user provisioning, channels, and server-sent messages. See the [server integration guide](https://brenox-web.vercel.app/docs?sdk=typescript&v=0.1.0).
+`BrenoxServer` covers user provisioning, channels, and server-sent messages. See the [server integration guide](https://www.breno-x.com/docs?sdk=typescript&v=0.1.1).
 
 ## React
 
@@ -62,12 +62,12 @@ For hooks (`BrenoxProvider`, `useMessages`, `useNotifications`, `useCallSignalin
 npm install @brenox/react @brenox/sdk react
 ```
 
-Docs: [@brenox/react on npm](https://www.npmjs.com/package/@brenox/react) · [React SDK guide](https://brenox-web.vercel.app/docs?sdk=react&v=0.1.0)
+Docs: [@brenox/react on npm](https://www.npmjs.com/package/@brenox/react) · [React SDK guide](https://www.breno-x.com/docs?sdk=react&v=0.1.1)
 
 ## Links
 
-- [Documentation](https://brenox-web.vercel.app/docs?sdk=typescript&v=0.1.0)
-- [Developer console](https://brenox-web.vercel.app)
+- [Documentation](https://www.breno-x.com/docs?sdk=typescript&v=0.1.1)
+- [Developer console](https://www.breno-x.com)
 - [GitHub](https://github.com/brainArt16/brenox-sdk)
 - [Issues](https://github.com/brainArt16/brenox-sdk/issues)
 
