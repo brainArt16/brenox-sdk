@@ -1,6 +1,7 @@
 import { ApiKeyHttpClient, type ApiKeyAuthStyle } from "./api-key-http";
 import { V1ChannelsResource } from "./resources/v1/channels";
 import { V1MessagesResource } from "./resources/v1/messages";
+import { V1SessionsResource } from "./resources/v1/sessions";
 import { V1UsersResource } from "./resources/v1/users";
 
 export interface BrenoxServerOptions {
@@ -15,6 +16,7 @@ export interface BrenoxServerOptions {
 
 export class BrenoxServer {
   readonly users: V1UsersResource;
+  readonly sessions: V1SessionsResource;
   readonly channels: V1ChannelsResource;
   readonly messages: V1MessagesResource;
 
@@ -29,6 +31,7 @@ export class BrenoxServer {
     });
 
     this.users = new V1UsersResource(this.http);
+    this.sessions = new V1SessionsResource(this.http);
     this.channels = new V1ChannelsResource(this.http);
     this.messages = new V1MessagesResource(this.http);
   }

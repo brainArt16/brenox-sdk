@@ -47,3 +47,15 @@ export interface ListDeveloperMessagesParams {
   limit?: number;
   offset?: number;
 }
+
+export interface CreateSessionInput {
+  external_id: string;
+  channel_id?: number;
+}
+
+export interface DeveloperSession {
+  token: string;
+  workspace_id: number;
+  channel_id?: number;
+  user: DeveloperUser;
+}

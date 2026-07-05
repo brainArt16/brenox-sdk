@@ -6,9 +6,11 @@ export type { ApiKeyAuthStyle } from "./api-key-http";
 
 export type {
   CreateDeveloperChannelInput,
+  CreateSessionInput,
   DeveloperChannel,
   DeveloperMessage,
   DeveloperMessageListItem,
+  DeveloperSession,
   DeveloperUser,
   ListDeveloperMessagesParams,
   ProvisionUserInput,
