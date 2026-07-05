@@ -2,7 +2,7 @@
 
 Official TypeScript SDK for [Brenox](https://www.breno-x.com) — realtime messaging, presence, notifications, attachments, and WebRTC signaling.
 
-- **Documentation:** [www.breno-x.com/docs](https://www.breno-x.com/docs?sdk=typescript&v=0.1.1)
+- **Documentation:** [www.breno-x.com/docs](https://www.breno-x.com/docs?sdk=typescript&v=0.1.3)
 - **Requires:** Node 18+ · browsers · bundlers
 
 ## Install
@@ -59,7 +59,7 @@ conn.sendMessage("Hello realtime!");
 
 `BrenoxClient` covers auth, workspaces, channels, messages (REST + WebSocket), typing, presence, notifications, attachments, and call signaling.
 
-`BrenoxServer` covers user provisioning, channels, and server-sent messages. See the [server integration guide](https://www.breno-x.com/docs?sdk=typescript&v=0.1.1).
+`BrenoxServer` covers user provisioning, sessions (embed JWT handoff), channels, and server-sent messages. See the [server integration guide](https://www.breno-x.com/docs?sdk=typescript&v=0.1.3).
 
 ## React
 
@@ -76,11 +76,11 @@ pnpm add @brenox/react @brenox/sdk react
 yarn add @brenox/react @brenox/sdk react
 ```
 
-Docs: [@brenox/react on npm](https://www.npmjs.com/package/@brenox/react) · [React SDK guide](https://www.breno-x.com/docs?sdk=react&v=0.1.1)
+Docs: [@brenox/react on npm](https://www.npmjs.com/package/@brenox/react) · [React SDK guide](https://www.breno-x.com/docs?sdk=react&v=0.1.3)
 
 ## Links
 
-- [Documentation](https://www.breno-x.com/docs?sdk=typescript&v=0.1.1)
+- [Documentation](https://www.breno-x.com/docs?sdk=typescript&v=0.1.3)
 - [Developer console](https://www.breno-x.com)
 - [GitHub](https://github.com/brainArt16/brenox-sdk)
 - [Issues](https://github.com/brainArt16/brenox-sdk/issues)
