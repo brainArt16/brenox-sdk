@@ -1,4 +1,8 @@
 import type { ApiErrorBody } from "./types/api";
+import {
+  DEFAULT_CLIENT_ERROR_MESSAGE,
+  sanitizeClientMessage,
+} from "./client-message";
 
 export class BrenoxError extends Error {
   readonly status: number;
@@ -17,13 +21,22 @@ export class BrenoxError extends Error {
     try {
       const json = (await response.json()) as ApiErrorBody;
       if (typeof json?.error === "string") {
-        body = json;
+        body = {
+          error: sanitizeClientMessage(json.error),
+        };
       }
     } catch {
       // ignore non-JSON bodies
     }
 
-    const message = body?.error ?? `HTTP ${response.status}`;
+    const message =
+      body?.error ??
+      sanitizeClientMessage(
+        response.statusText || `HTTP ${response.status}`,
+        response.status >= 500
+          ? DEFAULT_CLIENT_ERROR_MESSAGE
+          : `HTTP ${response.status}`
+      );
     return new BrenoxError(message, response.status, body);
   }
 }

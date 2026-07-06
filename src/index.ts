@@ -15,6 +15,12 @@ export type {
 export { BrenoxError } from "./errors";
 
 export {
+  DEFAULT_CLIENT_ERROR_MESSAGE,
+  isSensitiveClientMessage,
+  sanitizeClientMessage,
+} from "./client-message";
+
+export {
   localStorageTokenStore,
   memoryTokenStore,
 } from "./token-store";
