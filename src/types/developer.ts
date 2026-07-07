@@ -56,6 +56,7 @@ export interface CreateSessionInput {
 export interface DeveloperSession {
   token: string;
   workspace_id: number;
+  environment: "live" | "sandbox";
   channel_id?: number;
   user: DeveloperUser;
 }

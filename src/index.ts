@@ -15,6 +15,12 @@ export type {
 export { BrenoxError } from "./errors";
 
 export {
+  assertProductionApiKey,
+  isLiveApiKey,
+  isSandboxApiKey,
+} from "./api-key-env";
+
+export {
   DEFAULT_CLIENT_ERROR_MESSAGE,
   isSensitiveClientMessage,
   sanitizeClientMessage,

@@ -8,6 +8,7 @@ export interface App {
   name: string;
   slug: string;
   workspace_id: number;
+  sandbox_workspace_id?: number;
   owner_id: number;
   created_at: string;
 }

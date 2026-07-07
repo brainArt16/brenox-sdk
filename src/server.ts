@@ -1,4 +1,5 @@
 import { ApiKeyHttpClient, type ApiKeyAuthStyle } from "./api-key-http";
+import { assertProductionApiKey } from "./api-key-env";
 import { V1ChannelsResource } from "./resources/v1/channels";
 import { V1MessagesResource } from "./resources/v1/messages";
 import { V1SessionsResource } from "./resources/v1/sessions";
@@ -23,6 +24,7 @@ export class BrenoxServer {
   private readonly http: ApiKeyHttpClient;
 
   constructor(options: BrenoxServerOptions) {
+    assertProductionApiKey(options.apiKey);
     this.http = new ApiKeyHttpClient({
       baseUrl: options.baseUrl,
       apiKey: options.apiKey,
