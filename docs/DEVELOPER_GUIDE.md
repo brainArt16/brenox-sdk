@@ -41,7 +41,7 @@ Brenox ships official SDKs per language and framework. Pick the one that matches
 |-----|---------|--------|----------|
 | **JavaScript / TypeScript** | `@brenox/sdk` | Available | Web, Node, Electron |
 | **React** | `@brenox/react` | Available | Next.js, Vite, CRA |
-| **Python** | `brenox-sdk` | Coming soon | FastAPI, Django |
+| **Python** | `brenox-sdk` | Available | FastAPI, Django |
 | **Go** | `brenox-go` | Coming soon | Microservices, CLI |
 | **Flutter** | `brenox_sdk` | Coming soon | iOS, Android |
 | **Vue** | `@brenox/vue` | Coming soon | Vue 3, Nuxt |
