@@ -2,7 +2,7 @@
 
 Official TypeScript SDK for [Brenox](https://www.breno-x.com) — realtime messaging, presence, notifications, attachments, and WebRTC signaling.
 
-- **Documentation:** [www.breno-x.com/docs](https://www.breno-x.com/docs?sdk=typescript&v=0.1.3)
+- **Documentation:** [www.breno-x.com/docs](https://www.breno-x.com/docs?sdk=typescript&v=0.1.4)
 - **Requires:** Node 18+ · browsers · bundlers
 
 ## Install
@@ -50,6 +50,25 @@ await conn.connect();
 conn.sendMessage("Hello realtime!");
 ```
 
+### Attachments
+
+```typescript
+const uploaded = await client.attachments.uploadFile(file, {
+  fileName: file.name,
+  mimeType: file.type,
+});
+
+await client.messages.send(workspaceId, channelId, {
+  content: "See attached",
+  attachments: [uploaded],
+});
+
+// Display/download through the authenticated API — storage URLs stay hidden
+const blobUrl = await client.attachments.createObjectUrl(
+  workspaceId, channelId, messageId, attachmentId,
+);
+```
+
 ## Exports
 
 | Import | Client | Use case |
@@ -59,7 +78,7 @@ conn.sendMessage("Hello realtime!");
 
 `BrenoxClient` covers auth, workspaces, channels, messages (REST + WebSocket), typing, presence, notifications, attachments, and call signaling.
 
-`BrenoxServer` covers user provisioning, sessions (embed JWT handoff), channels, and server-sent messages. See the [server integration guide](https://www.breno-x.com/docs?sdk=typescript&v=0.1.3).
+`BrenoxServer` covers user provisioning, sessions (embed JWT handoff), channels, and server-sent messages. See the [server integration guide](https://www.breno-x.com/docs?sdk=typescript&v=0.1.4).
 
 ## React
 
@@ -80,7 +99,7 @@ Docs: [@brenox/react on npm](https://www.npmjs.com/package/@brenox/react) · [Re
 
 ## Links
 
-- [Documentation](https://www.breno-x.com/docs?sdk=typescript&v=0.1.3)
+- [Documentation](https://www.breno-x.com/docs?sdk=typescript&v=0.1.4)
 - [Developer console](https://www.breno-x.com)
 - [GitHub](https://github.com/brainArt16/brenox-sdk)
 - [Issues](https://github.com/brainArt16/brenox-sdk/issues)

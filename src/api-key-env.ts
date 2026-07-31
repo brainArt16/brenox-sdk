@@ -10,10 +10,11 @@ export function isLiveApiKey(apiKey: string): boolean {
 }
 
 export function assertProductionApiKey(apiKey: string): void {
-  if (typeof process === "undefined") {
-    return;
-  }
-  if (process.env.NODE_ENV !== "production") {
+  // Works without Node type definitions; process is absent in browsers.
+  const env = (
+    globalThis as { process?: { env?: Record<string, string | undefined> } }
+  ).process?.env;
+  if (env?.NODE_ENV !== "production") {
     return;
   }
   if (isSandboxApiKey(apiKey)) {
