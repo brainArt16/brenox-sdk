@@ -80,4 +80,45 @@ export class AttachmentsResource {
     );
     return response.attachments;
   }
+
+  /** Absolute API URL for streaming attachment bytes (requires auth). */
+  contentUrl(
+    workspaceId: number,
+    channelId: number,
+    messageId: number,
+    attachmentId: number,
+  ): string {
+    return `${this.http.getBaseUrl()}/api/workspaces/${workspaceId}/channels/${channelId}/messages/${messageId}/attachments/${attachmentId}/content`;
+  }
+
+  /**
+   * Fetch attachment bytes with the session token.
+   * Prefer this over opening `attachment.url` directly so storage paths stay hidden.
+   */
+  async fetchContent(
+    workspaceId: number,
+    channelId: number,
+    messageId: number,
+    attachmentId: number,
+  ): Promise<Blob> {
+    return this.http.requestBlob(
+      `/api/workspaces/${workspaceId}/channels/${channelId}/messages/${messageId}/attachments/${attachmentId}/content`,
+    );
+  }
+
+  /** Fetch content and return a short-lived blob: URL (revoke when done). */
+  async createObjectUrl(
+    workspaceId: number,
+    channelId: number,
+    messageId: number,
+    attachmentId: number,
+  ): Promise<string> {
+    const blob = await this.fetchContent(
+      workspaceId,
+      channelId,
+      messageId,
+      attachmentId,
+    );
+    return URL.createObjectURL(blob);
+  }
 }

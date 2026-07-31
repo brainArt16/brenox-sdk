@@ -72,6 +72,30 @@ export class HttpClient {
     return (await response.json()) as T;
   }
 
+  async requestBlob(
+    path: string,
+    options: HttpRequestOptions = {},
+  ): Promise<Blob> {
+    const response = await this.rawRequest(path, options);
+
+    if (response.status === 401 && options.auth !== false) {
+      const refreshed = await this.refreshToken();
+      if (refreshed) {
+        const retry = await this.rawRequest(path, options);
+        if (!retry.ok) {
+          throw await BrenoxError.fromResponse(retry);
+        }
+        return retry.blob();
+      }
+    }
+
+    if (!response.ok) {
+      throw await BrenoxError.fromResponse(response);
+    }
+
+    return response.blob();
+  }
+
   async rawRequest(
     path: string,
     options: HttpRequestOptions = {},

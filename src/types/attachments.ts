@@ -23,6 +23,7 @@ export interface Attachment {
   file_name: string;
   mime_type: string;
   size_bytes: number;
+  /** Authenticated API content path (or absolute URL). Not a direct storage URL. */
   url: string;
   created_at: string;
 }
